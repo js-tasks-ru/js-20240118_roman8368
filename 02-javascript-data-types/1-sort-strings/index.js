@@ -4,7 +4,7 @@
  * @param {string} [param="asc"] param - the sorting type "asc" or "desc"
  * @returns {string[]}
  */
-function sortStrings(arr, param = 'asc') {
+export function sortStrings(arr, param = 'asc') {
     switch (param) {
         case 'asc':
             return sortStringsAscending(arr);
@@ -16,8 +16,9 @@ function sortStrings(arr, param = 'asc') {
 }
 
 function sortStringsAscending(arr) {
-    return arr.sort((a, b) =>
-    a.toLowerCase().localeCompare(b.toLowerCase(), ['ru', 'en']));
+    return [...arr].sort((a, b) => {
+        return a.localeCompare(b, ['ru', 'en'], { caseFirst: 'upper' });
+    });
 }
 
 function sortStringsDescending(arr) {
